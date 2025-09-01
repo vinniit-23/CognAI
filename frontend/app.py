@@ -1,12 +1,13 @@
 
 import streamlit as st
-import google.generativeai as genai
+import requests
 from dotenv import load_dotenv
 import os
 
+
+#API made by fastapi is stored in .env file so setting api key here
 load_dotenv()
-gemini_api_key = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=gemini_api_key)
+API_URL =os.getenv("API_URL")
 
 
 st.title("CognAI")
@@ -21,15 +22,15 @@ with st.sidebar:
 #stored input from user in prompt variable
 prompt = st.chat_input("Enter prompt", key="prompt")
 
-model= genai.GenerativeModel('gemini-1.5-flash')
 
 if prompt:
     
     st.write(f"User:-  {prompt}")
 
     try:
-      response =model.generate_content(prompt)
-      st.write(f"gemini:-  {response.text}")
+        response = requests.post(API_URL, json={"user_prompt": prompt})
+        data = response.json()
+        st.write(f"CognAI:-  {data["ai_response"]}")
     except Exception as e:
         st.write(f"An error occurred: {e}")
 
