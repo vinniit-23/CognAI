@@ -1,2 +1,0 @@
-class FetchEmail:
-    pass
