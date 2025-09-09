@@ -9,6 +9,8 @@ import Sidebar from "./components/Sidebar.jsx";
 import ChatWindow from "./components/ChatWindow.jsx";
 import SignInFlow from "./components/SignInFlow.jsx";
 import { notifyConnection } from "./api/backend.js";
+// Remove this import if not needed elsewhere
+// import ConnectGmailButton from "./components/ConnectGmailButton";
 
 function App() {
   const {
@@ -31,6 +33,7 @@ function App() {
     console.log("sessionToken:", token);
   }, [isAuthenticated, session, user]);
 
+  // Handle Google OAuth return
   useEffect(() => {
     const handleOAuthReturn = async () => {
       try {
@@ -52,7 +55,7 @@ function App() {
     }
   }, [isAuthenticated, user, session, isLoading]);
 
-  const handleSignInSuccess = async (e) => {
+  const handleSignInSuccess = async () => {
     if (sdk) {
       try {
         await sdk.refresh();
@@ -93,18 +96,25 @@ function App() {
     );
   }
 
-  // Get session token from Descope SDK
+  // Ensure we have a valid userId for Gmail connect
+  const currentUser = user || session?.user;
+  const userId = currentUser?.userId;
   const sessionToken = getSessionToken();
+
+  if (!userId) {
+    console.error("❌ User ID is missing. Cannot connect Gmail.");
+  }
 
   return (
     <div className="flex h-screen bg-background">
-      <div className="w-80 sidebar">
+      <div className="w-80 sidebar flex flex-col items-center p-4">
         <Sidebar
           session={session || { user }}
           messages={messages}
           onSignInSuccess={handleSignInSuccess}
-          sessionToken={sessionToken} // Pass the session token here
+          sessionToken={sessionToken}
         />
+        {/* REMOVED: Duplicate ConnectGmailButton - it should only be in Sidebar */}
       </div>
       <div className="flex-1 flex flex-col">
         <ChatWindow
