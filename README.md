@@ -115,7 +115,7 @@ Watch the functionality walkthrough in under 5 minutes:
 
 Access full project code and documentation here:
 
-**[🔗 GitHub Repository](https://github.com/yourusername/cognai)**
+**[🔗 GitHub Repository](https://github.com/vinniit-23/CognAI)**
 
 ---
 
@@ -141,16 +141,23 @@ cognai/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py
-│   │   ├── auth/
-│   │   ├── gmail/
-│   │   └── llm/
+│   │   ├── core.py
+│   │   ├── agents/
+│   │   ├── routes/
+│   │   └── utils/
 │   ├── requirements.txt
 │   └── .env.example
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   ├── pages/
-│   │   └── utils/
+│   │   ├── api/
+│   │   ├── contexts/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   └── styles/
+│   │   └── App.jsx/
+│   │   └── main.jsx/
+│   │   └── index.css/
 │   ├── package.json
 │   └── vite.config.js
 └── README.md
