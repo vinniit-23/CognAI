@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CognAI Design System - Modern AI Chat Interface */
+
+@layer base {
+  :root {
+    /* Core Colors - Modern AI Theme */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    
+    /* AI Brand Colors */
+    --primary: 252 83% 57%; /* Purple AI brand */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 252 100% 70%;
+    
+    /* Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --sidebar-bg: 252 15% 8%; /* Dark sidebar */
+    --sidebar-foreground: 0 0% 95%;
+    
+    /* Interactive Elements */
+    --accent: 252 83% 57%;
+    --accent-foreground: 0 0% 100%;
+    --secondary: 252 15% 96%;
+    --secondary-foreground: 252 15% 15%;
+    
+    /* Messaging */
+    --user-message: 252 83% 57%;
+    --user-message-text: 0 0% 100%;
+    --ai-message: 0 0% 96%;
+    --ai-message-text: 222.2 84% 4.9%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders & Inputs */
+    --border: 252 15% 90%;
+    --input: 252 15% 95%;
+    --ring: 252 83% 57%;
+    --muted: 252 15% 96%;
+    --muted-foreground: 252 10% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(252 83% 57%), hsl(252 100% 70%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(252 15% 8%), hsl(252 15% 6%));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(252 83% 57% / 0.3);
+    --shadow-message: 0 2px 8px hsl(252 15% 15% / 0.1);
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 252 15% 6%;
+    --foreground: 0 0% 95%;
+    
+    --card: 252 15% 8%;
+    --card-foreground: 0 0% 95%;
+    
+    --secondary: 252 15% 12%;
+    --secondary-foreground: 0 0% 90%;
+    
+    --ai-message: 252 15% 10%;
+    --ai-message-text: 0 0% 90%;
+    
+    --border: 252 15% 15%;
+    --input: 252 15% 12%;
+    --muted: 252 15% 10%;
+    --muted-foreground: 252 10% 60%;
+    
+    --shadow-message: 0 2px 8px hsl(0 0% 0% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Chat Message Styles */
+  .message-user {
+    @apply bg-user-message text-user-message-text rounded-2xl rounded-br-md px-4 py-3 max-w-xs ml-auto;
+    box-shadow: var(--shadow-message);
+  }
+  
+  .message-ai {
+    @apply bg-ai-message text-ai-message-text rounded-2xl rounded-bl-md px-4 py-3 max-w-xs mr-auto;
+    box-shadow: var(--shadow-message);
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    background: var(--gradient-sidebar);
+    @apply text-sidebar-foreground;
+  }
+  
+  /* Button Variants */
+  .btn-primary {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted px-3 py-2 rounded-lg transition-colors;
+  }
+  
+  /* Input Styles */
+  .input-modern {
+    @apply bg-input border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200;
+  }
+  
+  /* Loading Animation */
+  .loading-dots {
+    @apply flex space-x-1;
+  }
+  
+  .loading-dots > div {
+    @apply w-2 h-2 bg-muted-foreground rounded-full animate-pulse;
+    animation-delay: calc(var(--delay) * 200ms);
+  }
+}
+
+/* Customization Guide:
+ * 
+ * To customize the AI theme:
+ * 1. Modify CSS variables in :root for colors
+ * 2. Update --gradient-primary for brand gradients
+ * 3. Adjust --shadow-glow for brand glow effects
+ * 4. Change --primary and --primary-glow for different brand colors
+ * 
+ * For messaging styles:
+ * - .message-user: User message bubbles
+ * - .message-ai: AI response bubbles
+ * - .sidebar: Sidebar gradient background
+ * 
+ * Button variants:
+ * - .btn-primary: Main action buttons with gradient
+ * - .btn-ghost: Subtle secondary buttons
+ */

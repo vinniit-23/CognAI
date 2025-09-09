@@ -1,9 +1,4 @@
 # backend/app/agents/summarizer.py
-"""
-Create a summarizer that uses core.llm_generate.
-This is intentionally simple — feed list of snippets into a prompt.
-"""
-
 from typing import List
 from ..core import llm_generate
 
@@ -11,7 +6,7 @@ def summarize_messages(messages: List[dict], max_lines: int = 5) -> str:
     if not messages:
         return "No messages found to summarize."
     snippets = []
-    for m in messages[:50]:  # limit
+    for m in messages[:50]:
         subject = m.get("subject","(no subject)")
         frm = m.get("from","")
         snippet = m.get("snippet","")
