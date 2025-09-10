@@ -107,7 +107,8 @@ Watch the functionality walkthrough in under 5 minutes:
 
 [![CognAI Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://youtube.com/watch?v=YOUR_VIDEO_ID)
 
-**[🎬 YouTube Demo Link](https://youtube.com/watch?v=YOUR_VIDEO_ID)**
+**[🎬 YouTube Demo Link](https://www.youtube.com/watch?v=0GNS76iu0P8)**
+**[🎬 YouTube Pitch Link](https://www.youtube.com/watch?v=ZiaWvzu5odk)**
 
 ---
 
