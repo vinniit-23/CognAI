@@ -25,7 +25,7 @@ app.add_middleware(
 
 
 # include routers
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(auth.router)
 app.include_router(chat.router, prefix="/chat", tags=["chat"])
 app.include_router(emails.router, prefix="/emails", tags=["emails"])
 

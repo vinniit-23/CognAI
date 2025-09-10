@@ -62,6 +62,43 @@ def _bearer_for(project_id: str, key: str) -> str:
     return f"Bearer {project_id}:{key}"
 
 
+# backend/app/utils/descope.py
+# (place this function alongside your other helpers)
+
+def get_connect_url_with_refresh(
+    refresh_token: str,
+    app_id: str,
+    redirect_url: str = "http://localhost:8080",
+    scopes: Optional[list] = None,
+) -> Dict[str, str]:
+    """
+    Use the user's refresh JWT to call the Descope outbound connect endpoint.
+    Header: Authorization: Bearer <project_id>:<refreshJWT>
+    Returns JSON from Descope (expected to include 'url' or similar).
+    """
+    if not DESCOPE_PROJECT_ID:
+        raise RuntimeError("DESCOPE_PROJECT_ID must be set")
+
+    if not refresh_token:
+        raise ValueError("refresh_token is required")
+
+    url = f"{BASE_URL_OUTBOUND}/connect"
+    headers = {
+        "Authorization": f"Bearer {DESCOPE_PROJECT_ID}:{refresh_token}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "appId": app_id,
+        "redirectURL": redirect_url,
+        "scopes": scopes or [],
+    }
+
+    r = requests.post(url, headers=headers, json=payload, timeout=15)
+    r.raise_for_status()
+    return r.json()
+
+
+
 def _auth_header_for_auth_endpoints() -> Dict[str, str]:
     """
     Use auth-management key for auth-related endpoints (session validation, outbound connect).
@@ -89,7 +126,7 @@ def _auth_header_for_mgmt() -> Dict[str, str]:
 
 def get_connect_url(
     outbound_app_id: str,
-    redirect_url: str = "http://localhost:5173",
+    redirect_url: str = "http://localhost:8080",
     scopes: Optional[list] = None,
     user_id: Optional[str] = None,
     session_token: Optional[str] = None,
